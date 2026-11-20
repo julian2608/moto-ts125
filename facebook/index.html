@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="La Suzuki TS 125 ER de 1981 que construyen los comentarios de Facebook de Mecánica para no mecánicos: busca tu pieza.">
+<style>*,*::before,*::after{box-sizing:border-box}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>La moto de la comunidad · Facebook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&display=swap">
+<style>
+/* Layout: el cielo y el pasto de los reels; arriba el contador gigante como en el vídeo, abajo, sobre el pasto,
+   las tarjetas oscuras de «@usuario puso: pieza». Un solo aspecto (el de los vídeos), igual en tema claro y oscuro. */
+:root {
+  --cielo-1: #4a9cf0; --cielo-2: #dff1fd; --pasto: #6aa84f; --pasto-osc: #4f8a38;
+  --tarjeta: rgba(10, 18, 8, 0.72); --tarjeta-2: rgba(10, 18, 8, 0.5);
+  --blanco: #ffffff; --tinta: #10200c; --amarillo: #ffd84a; --ts: #f2c81b; --franja: #1f4fa0; --suave: #d9e6d2;
+  --display: "Archivo Black", "Arial Black", Arial, sans-serif;
+  --texto: "Archivo", Arial, Helvetica, sans-serif;
+  --sombra: 0 4px 14px rgba(0, 0, 0, 0.55);
+  color-scheme: light;
+}
+body { background: var(--pasto); color: var(--blanco); font-family: var(--texto); font-size: 16px; line-height: 1.5; }
+.ancho { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, .num { font-family: var(--display); font-weight: 400; text-wrap: balance; text-shadow: var(--sombra); margin: 0; }
+.cielo { background: linear-gradient(var(--cielo-1), var(--cielo-2)); padding-block: 40px 0; text-align: center; }
+.etiqueta { font-family: var(--display); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; text-shadow: var(--sombra); }
+h1 { font-size: clamp(2.1rem, 7vw, 3.8rem); line-height: 1.02; margin-top: 8px; }
+.moto { font-family: var(--display); font-size: 1.05rem; margin-top: 8px; text-shadow: var(--sombra); }
+.contador { margin-top: 26px; }
+.num { font-size: clamp(4.5rem, 19vw, 9.5rem); line-height: 0.95; font-variant-numeric: tabular-nums; }
+.de { font-family: var(--display); font-size: clamp(1.1rem, 3.6vw, 1.6rem); text-shadow: var(--sombra); }
+.barra { height: 22px; border-radius: 11px; background: var(--tarjeta-2); margin: 22px auto 0; max-width: 620px; overflow: hidden; border: 2px solid rgba(255,255,255,0.75); }
+.barra > i { display: block; height: 100%; background: linear-gradient(90deg, var(--ts), var(--amarillo)); min-width: 0; }
+.faltan { font-weight: 800; margin-top: 10px; text-shadow: var(--sombra); }
+.visor-caja { position: relative; margin-top: 30px; border-radius: 22px 22px 0 0; overflow: hidden; aspect-ratio: 4 / 3; max-height: 70vh; width: 100%; background: linear-gradient(var(--cielo-1), var(--cielo-2)); }
+@media (max-width: 560px) { .visor-caja { aspect-ratio: 3 / 4; } }
+#visor { position: absolute; inset: 0; touch-action: none; cursor: grab; }
+#visor:active { cursor: grabbing; }
+/* (19/11) el círculo que señala la pieza marcada en el 3D */
+.lupa { position: absolute; z-index: 2; pointer-events: none; transform: translate(-50%, -50%); border: 4px solid var(--amarillo); border-radius: 50%; box-shadow: 0 0 0 3px rgba(0,0,0,0.35), 0 0 18px rgba(255,216,74,0.8); }
+#poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s; }
+.modos { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; background: var(--tarjeta); border-radius: 999px; padding: 5px; z-index: 2; }
+.modos button { font: 800 0.95rem var(--texto); border: 0; border-radius: 999px; padding: 8px 16px; background: transparent; color: var(--blanco); cursor: pointer; white-space: nowrap; }
+.modos button[aria-pressed="true"] { background: var(--amarillo); color: var(--tinta); }
+.modos button:focus-visible { outline: 3px solid var(--blanco); outline-offset: 2px; }
+.pista { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-weight: 800; font-size: 0.9rem; text-shadow: var(--sombra); pointer-events: none; z-index: 2; }
+.marcada { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); background: var(--tarjeta); border-radius: 16px; padding: 10px 18px; z-index: 2; text-align: center; width: max-content; max-width: calc(100% - 32px); }
+.marcada b { color: var(--amarillo); font-family: var(--display); font-weight: 400; display: block; overflow-wrap: anywhere; }
+.marcada button { margin-top: 6px; font: 800 0.85rem var(--texto); background: transparent; color: var(--suave); border: 1px solid var(--suave); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.botones { grid-column: 2; display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.ver { font: 800 0.85rem var(--texto); background: var(--amarillo); color: var(--tinta); border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; overflow-wrap: anywhere; }
+.ver.copia { background: transparent; color: var(--blanco); border: 1px solid rgba(255,255,255,0.6); }
+.ver:focus-visible, .marcada button:focus-visible { outline: 3px solid var(--blanco); outline-offset: 2px; }
+.pasto { padding-block: 34px 60px; display: grid; gap: 30px; }
+h2 { font-size: clamp(1.5rem, 4.6vw, 2.1rem); }
+.caja { background: var(--tarjeta); border-radius: 22px; padding: 22px; display: grid; gap: 14px; min-width: 0; }
+.proxima { display: grid; gap: 4px; }
+.proxima .quien { font-family: var(--display); color: var(--amarillo); font-size: clamp(1.3rem, 4.5vw, 1.8rem); }
+.proxima p { margin: 0; color: var(--suave); }
+.reglas { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.reglas b { color: var(--amarillo); }
+.grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.grupo { background: var(--tarjeta-2); border-radius: 14px; padding: 12px 14px; display: grid; gap: 6px; }
+.grupo .fila { display: flex; justify-content: space-between; gap: 8px; font-weight: 800; }
+.grupo .fila span:last-child { font-variant-numeric: tabular-nums; color: var(--suave); font-weight: 600; }
+.grupo .mini { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.18); overflow: hidden; }
+.grupo .mini i { display: block; height: 100%; background: var(--amarillo); }
+.grupo.lista .fila span:last-child { color: var(--amarillo); }
+label { font-family: var(--display); font-size: 1.05rem; }
+.buscar { display: flex; gap: 10px; flex-wrap: wrap; }
+input[type="search"] { flex: 1 1 240px; min-width: 0; font: 600 1.1rem var(--texto); padding: 14px 16px; border-radius: 14px; border: 3px solid var(--amarillo); background: var(--blanco); color: var(--tinta); }
+input[type="search"]:focus { outline: 3px solid var(--blanco); outline-offset: 2px; }
+.filtros { display: flex; gap: 8px; flex-wrap: wrap; }
+.filtros button, .mas { font: 800 0.95rem var(--texto); border-radius: 999px; padding: 9px 16px; border: 2px solid rgba(255,255,255,0.7); background: transparent; color: var(--blanco); cursor: pointer; }
+.filtros button[aria-pressed="true"] { background: var(--amarillo); color: var(--tinta); border-color: var(--amarillo); }
+.filtros button:focus-visible, .mas:focus-visible { outline: 3px solid var(--amarillo); outline-offset: 2px; }
+.resumen { color: var(--suave); margin: 0; font-weight: 600; }
+ol.piezas { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.pieza { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: baseline; background: var(--tarjeta-2); border-radius: 14px; padding: 12px 14px; min-width: 0; }
+.pieza .n { font-family: var(--display); color: var(--amarillo); font-variant-numeric: tabular-nums; grid-row: span 2; font-size: 1.15rem; }
+.pieza .quien { font-family: var(--display); overflow-wrap: anywhere; }
+.pieza .que { color: var(--blanco); font-weight: 600; }
+.pieza .meta { grid-column: 2; color: var(--suave); font-size: 0.86rem; overflow-wrap: anywhere; }
+.red { display: inline-block; font: 800 0.72rem var(--texto); letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; vertical-align: 2px; margin-left: 6px; background: var(--blanco); color: var(--tinta); }
+.red.facebook { background: var(--franja); color: var(--blanco); }
+mark { background: var(--amarillo); color: var(--tinta); border-radius: 4px; padding: 0 2px; }
+.vacio { color: var(--suave); margin: 0; }
+.top { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.top li { display: flex; justify-content: space-between; gap: 10px; background: var(--tarjeta-2); border-radius: 12px; padding: 10px 14px; font-weight: 800; min-width: 0; }
+.top li span:first-child { overflow-wrap: anywhere; min-width: 0; }
+.top li span:last-child { color: var(--amarillo); font-variant-numeric: tabular-nums; }
+footer { color: var(--blanco); text-align: center; font-weight: 600; padding-block: 0 40px; text-shadow: var(--sombra); }
+@media (prefers-reduced-motion: no-preference) { .barra > i { transition: width 0.8s ease; } }
+.ir-buscar { box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 420px; text-align: center; margin: 18px auto 0; font: 400 clamp(1.05rem, 4vw, 1.25rem) var(--display); background: var(--amarillo); color: var(--tinta); text-decoration: none; border: 0; cursor: pointer; border-radius: 999px; padding: 16px 22px; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+.ir-buscar:focus-visible { outline: 3px solid var(--blanco); outline-offset: 3px; }
+.aviso { font-size: 0.9rem; font-weight: 700; margin: 8px 0 0; text-align: center; text-shadow: var(--sombra); }
+.caja .aviso { text-align: left; text-shadow: none; color: var(--suave); margin: -4px 0 12px; }
+#t-buscar { scroll-margin-top: 16px; }
+</style>
+
+<header class="cielo">
+  <div class="ancho">
+    <div class="etiqueta">Mecánica para no mecánicos</div>
+    <h1>La moto de la comunidad</h1>
+    <div class="moto">Suzuki TS 125 ER · 1981 · la de Facebook</div>
+    <div class="contador">
+      <div class="num" id="cuenta">0</div>
+      <div class="de" id="de">de 1.513 piezas</div>
+      <div class="barra" role="progressbar" aria-label="Piezas puestas" id="barra"><i id="relleno" style="width:0%"></i></div>
+      <div class="faltan" id="faltan"></div>
+    </div>
+    <button type="button" class="ir-buscar">🔍 Busca tu usuario y tu pieza</button>
+    <p class="aviso">Se actualiza cada 10 minutos</p>
+    <div class="visor-caja">
+      <img id="poster" src="foto-meta.jpg" alt="La Suzuki TS 125 ER amarilla, terminada">
+      <div class="lupa" id="lupa" hidden></div>
+      <div id="visor" aria-label="La moto en 3D: arrastra para girarla y pellizca o usa la rueda para acercarte"></div>
+      <div class="modos" role="group" aria-label="Qué moto ver">
+        <button type="button" id="m-va" aria-pressed="true">Así va</button>
+        <button type="button" id="m-meta" aria-pressed="false">Así quedará</button>
+      </div>
+      <div class="marcada" id="marcada" hidden><b id="marcada-txt"></b><button type="button" id="quitar">Quitar</button></div>
+      <div class="pista">Arrastra para girar · pellizca para acercar</div>
+    </div>
+  </div>
+</header>
+
+<main class="ancho pasto">
+  <section class="caja proxima" aria-labelledby="t-proxima">
+    <div class="etiqueta" id="t-proxima">La próxima pieza</div>
+    <div class="quien" id="proxima"></div>
+    <p id="proxima-sub"></p>
+  </section>
+
+  <section class="caja" aria-labelledby="t-buscar" id="buscar">
+    <h2 id="t-buscar">Busca tu pieza</h2>
+    <p class="aviso">Se actualiza cada 10 minutos: si comentaste hace poco, espera un rato.</p>
+    <label for="q">Tu nombre de Facebook, el número o el nombre de una pieza</label>
+    <div class="buscar">
+      <input type="search" id="q" placeholder="Ej.: Carlos Pérez, 245 o tanque" autocomplete="off">
+    </div>
+    <p class="resumen" id="resumen" aria-live="polite"></p>
+    <ol class="piezas" id="lista"></ol>
+    <button type="button" class="mas" id="mas" hidden>Ver más</button>
+  </section>
+
+  <section class="caja" aria-labelledby="t-grupos">
+    <h2 id="t-grupos">Cómo va cada parte</h2>
+    <div class="grupos" id="grupos"></div>
+  </section>
+
+  <section class="caja" aria-labelledby="t-top" id="caja-top" hidden>
+    <h2 id="t-top">Quién ha puesto más piezas</h2>
+    <ol class="top" id="top"></ol>
+  </section>
+
+  <section class="caja" aria-labelledby="t-reglas">
+    <h2 id="t-reglas">Cómo se construye</h2>
+    <ul class="reglas">
+      <li><b>Etiqueta a alguien en tu comentario y pones 1 pieza.</b> Solo cuentan los comentarios del reel de presentación en Facebook. Instagram construye su propia moto.</li>
+      <li>Los comentarios sin etiqueta no ponen pieza, y etiquetarte a ti mismo tampoco cuenta.</li>
+      <li>Si comentas varias veces, cuenta <b>tu primer comentario</b>.</li>
+      <li>Las piezas se montan en orden, como en el taller: primero el chasis, al final la electricidad.</li>
+      <li>Cada pieza lleva el nombre de quien la puso y sale en el siguiente episodio.</li>
+    </ul>
+  </section>
+</main>
+<footer class="ancho" id="pie"></footer>
+
+<script src="datos.js"></script>
+<script>
+const DATOS = window.DATOS || null;
+
+const mil = (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+const normal = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/^@/, "").trim();
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+const quien = (p) => (p.red === "facebook" ? p.usuario : "@" + p.usuario);
+const fecha = (f) => { try { return new Date(f).toLocaleDateString("es", { day: "numeric", month: "short" }); } catch (e) { return ""; } };
+
+const D = DATOS || { total: 1513, piezas: [], catalogo: [], episodios: [] };
+// (19/11) las piezas que se repiten dicen cuál es de cuántas: «Bola del cojinete de la dirección 7 de 40»
+const DE = {}; for (const [nm] of D.catalogo) { const b = nm.replace(/ \d+$/, ""); DE[b] = (DE[b] || 0) + 1; }
+const nombre = (n) => { const nm = (D.catalogo[n - 1] || [""])[0], b = nm.replace(/ \d+$/, ""); return DE[b] > 1 && nm !== b ? `${nm} de ${DE[b]}` : nm; };
+const TOTAL = D.total, VAN = D.piezas.length;
+
+// arriba: contador, barra y fotos
+document.getElementById("cuenta").textContent = mil(VAN);
+document.getElementById("de").textContent = `de ${mil(TOTAL)} piezas`;
+const pct = (100 * VAN) / TOTAL;
+document.getElementById("relleno").style.width = pct.toFixed(2) + "%";
+document.getElementById("barra").setAttribute("aria-valuenow", String(VAN));
+document.getElementById("barra").setAttribute("aria-valuemax", String(TOTAL));
+document.getElementById("faltan").textContent = VAN >= TOTAL ? "¡Terminada! La construyeron ustedes."
+  : VAN === 0 ? "Todavía no hay piezas: la primera es para el primer comentario." : `Faltan ${mil(TOTAL - VAN)} piezas · ${pct.toFixed(1).replace(".", ",")} %`;
+// el visor 3D: «Así va» / «Así quedará» y la pieza marcada
+const bVa = document.getElementById("m-va"), bMeta = document.getElementById("m-meta");
+const marcada = document.getElementById("marcada"), marcadaTxt = document.getElementById("marcada-txt");
+let modo = VAN > 0 ? "va" : "meta";
+const pintaModo = () => { bVa.setAttribute("aria-pressed", String(modo === "va")); bMeta.setAttribute("aria-pressed", String(modo === "meta")); };
+pintaModo();
+const visor = () => window.visorTS125;
+// un enlace directo a una pieza: …#pieza-311 la enseña brillando al abrir la página
+const piezaDelEnlace = () => { const m = /^#pieza-(\d+)$/.exec(location.hash); return m ? D.piezas.find((p) => p.n === Number(m[1])) : null; };
+window.addEventListener("visor-listo", () => {
+  document.getElementById("poster").style.opacity = "0"; setTimeout(() => (document.getElementById("poster").hidden = true), 600);
+  visor().modo(modo); const p = piezaDelEnlace(); if (p) verEnMoto(p, false);
+});
+// el botón de arriba: baja a la búsqueda sin cambiar el enlace y deja el cursor en la caja
+document.querySelector(".ir-buscar").addEventListener("click", (ev) => {
+  ev.preventDefault(); document.getElementById("buscar").scrollIntoView({ behavior: "smooth", block: "start" });
+  setTimeout(() => document.getElementById("q").focus({ preventScroll: true }), 450);
+});
+window.addEventListener("hashchange", () => { const p = piezaDelEnlace(); if (p) verEnMoto(p, true); });
+bVa.addEventListener("click", () => { modo = "va"; pintaModo(); marcada.hidden = true; visor()?.modo("va"); });
+bMeta.addEventListener("click", () => { modo = "meta"; pintaModo(); marcada.hidden = true; visor()?.modo("meta"); });
+document.getElementById("quitar").addEventListener("click", () => { marcada.hidden = true; visor()?.marca(0); });
+function verEnMoto(p, baja = true) {
+  modo = "va"; pintaModo();
+  marcadaTxt.textContent = `${quien(p)} · #${mil(p.n)} ${nombre(p.n)}`;
+  marcada.hidden = false; visor()?.marca(p.n);
+  if (baja) document.querySelector(".visor-caja").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+}
+
+// la próxima pieza
+const sig = D.catalogo[VAN];
+document.getElementById("proxima").textContent = sig ? `N.º ${mil(VAN + 1)}: ${nombre(VAN + 1)}` : "No queda ninguna";
+document.getElementById("proxima-sub").textContent = sig ? `${sig[1]}. Será para el próximo comentario.` : "La moto está entera.";
+
+// cada parte
+const grupos = [];
+D.catalogo.forEach(([, g], i) => { let x = grupos.find((y) => y.g === g); if (!x) grupos.push((x = { g, t: 0, v: 0 })); x.t++; if (i < VAN) x.v++; });
+const cajaG = document.getElementById("grupos");
+for (const x of grupos) {
+  const d = el("div", "grupo" + (x.v === x.t ? " lista" : ""));
+  const f = el("div", "fila"); f.append(el("span", "", x.g), el("span", "", x.v === x.t ? "¡Lista!" : `${mil(x.v)} / ${mil(x.t)}`));
+  const m = el("div", "mini"), i = el("i"); i.style.width = ((100 * x.v) / x.t).toFixed(1) + "%"; m.append(i);
+  d.append(f, m); cajaG.append(d);
+}
+
+// quién ha puesto más
+const cuenta = new Map();
+for (const p of D.piezas) { const k = p.red + ":" + p.usuario; cuenta.set(k, { p, n: (cuenta.get(k)?.n || 0) + 1 }); }
+const lideres = [...cuenta.values()].sort((a, b) => b.n - a.n).slice(0, 10);
+if (lideres.length > 1 && lideres[0].n > 1) {
+  document.getElementById("caja-top").hidden = false;
+  const ol = document.getElementById("top");
+  for (const { p, n } of lideres) { const li = el("li"); li.append(el("span", "", quien(p)), el("span", "", `${n} ${n === 1 ? "pieza" : "piezas"}`)); ol.append(li); }
+}
+
+// el buscador y la lista (las más nuevas primero)
+const lista = document.getElementById("lista"), mas = document.getElementById("mas"), resumen = document.getElementById("resumen");
+const q = document.getElementById("q");
+let red = "", tope = 30;
+const resalta = (txt, aguja) => {
+  const span = el("span"); if (!aguja) { span.textContent = txt; return span; }
+  const i = normal(txt).indexOf(aguja);
+  if (i < 0) { span.textContent = txt; return span; }
+  const off = txt.startsWith("@") ? 1 : 0;
+  span.append(txt.slice(0, i + off), el("mark", "", txt.slice(i + off, i + off + aguja.length)), txt.slice(i + off + aguja.length));
+  return span;
+};
+function pinta() {
+  const aguja = normal(q.value), num = /^\d+$/.test(aguja) ? Number(aguja) : null;
+  let rs = D.piezas.filter((p) => !red || p.red === red);
+  if (aguja) rs = rs.filter((p) => num ? p.n === num : normal(p.usuario).includes(aguja) || normal(D.catalogo[p.n - 1]?.[0]).includes(aguja));
+  rs = rs.slice().sort((a, b) => b.n - a.n);
+  lista.textContent = "";
+  if (!D.piezas.length) { resumen.textContent = "Aún no hay piezas puestas. Cuando salga el primer episodio, aquí verás quién puso cada una."; mas.hidden = true; return; }
+  resumen.textContent = aguja ? (rs.length ? `${mil(rs.length)} ${rs.length === 1 ? "pieza encontrada" : "piezas encontradas"}` : "No encontramos esa pieza ni ese usuario. Revisa cómo está escrito, sin espacios de más.")
+    : `${mil(D.piezas.length)} piezas puestas, de la más nueva a la primera`;
+  for (const p of rs.slice(0, tope)) {
+    const c = D.catalogo[p.n - 1] || ["", ""];
+    const li = el("li", "pieza");
+    const qn = el("div", "quien"); qn.append(resalta(quien(p), num ? "" : aguja), el("span", "red " + p.red, p.red === "facebook" ? "Facebook" : "Instagram"));
+    const que = el("div", "que"); que.append("puso: ", resalta(nombre(p.n), num ? "" : aguja));
+    const ver = el("button", "ver", "Ver en la moto"); ver.type = "button"; ver.addEventListener("click", () => verEnMoto(p));
+    const enlace = el("button", "ver copia", "Copiar enlace"); enlace.type = "button";
+    enlace.addEventListener("click", () => {
+      const url = location.href.split("#")[0] + "#pieza-" + p.n;
+      const listo = () => { enlace.textContent = "¡Copiado!"; setTimeout(() => (enlace.textContent = "Copiar enlace"), 1600); };
+      try { navigator.clipboard.writeText(url).then(listo, () => { enlace.textContent = url; }); } catch (e) { enlace.textContent = url; }
+    });
+    const botones = el("div", "botones"); botones.append(ver, enlace);
+    li.append(el("div", "n", "#" + mil(p.n)), qn, que, el("div", "meta", `${c[1]} · ${fecha(p.fecha)}${p.texto ? ` · «${p.texto.length > 90 ? p.texto.slice(0, 90) + "…" : p.texto}»` : ""}`), botones);
+    lista.append(li);
+  }
+  mas.hidden = rs.length <= tope;
+}
+q.addEventListener("input", () => { tope = 30; pinta(); });
+mas.addEventListener("click", () => { tope += 60; pinta(); });
+document.querySelectorAll(".filtros button").forEach((b) => b.addEventListener("click", () => {
+  red = b.dataset.red; document.querySelectorAll(".filtros button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); tope = 30; pinta();
+}));
+pinta();
+
+const ult = D.episodios[D.episodios.length - 1];
+document.getElementById("pie").textContent = `Episodio ${ult ? ult.n : 0} · actualizado el ${D.actualizado || ""}`;
+</script>
+<script src="visor.js"></script>
+</body>
+</html>
