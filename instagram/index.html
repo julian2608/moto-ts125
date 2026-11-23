@@ -172,7 +172,7 @@ footer { color: var(--blanco); text-align: center; font-weight: 600; padding-blo
 </main>
 <footer class="ancho" id="pie"></footer>
 
-<script src="datos.js"></script>
+<script>document.write('<script src="datos.js?v='+Date.now()+'"><\/script>')</script>
 <script>
 const DATOS = window.DATOS || null;
 
@@ -301,6 +301,6 @@ pinta();
 const ult = D.episodios[D.episodios.length - 1];
 document.getElementById("pie").textContent = `Episodio ${ult ? ult.n : 0} · actualizado el ${D.actualizado || ""}`;
 </script>
-<script src="visor.js"></script>
+<script src="visor.js?v=1795099039779"></script>
 </body>
 </html>
